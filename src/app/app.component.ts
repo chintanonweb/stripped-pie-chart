@@ -8,20 +8,70 @@ import { EChartsOption } from 'echarts';
 })
 export class AppComponent {
   title = 'stripped-pie-chart';
+  chartData = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
   chartOption: EChartsOption = {
-    xAxis: {
+    legend: {
+      orient: 'vertical',
+      right: 200,
+      top: 'center',
+      data: [
+        {
+          name: 'Legend A',
+          icon: 'rect'
+        },
+        {
+          name: 'Legend B',
+          icon: 'circle'
+        },
+        {
+          name: 'Legend C',
+          icon: 'pin'
+        }
+      ]
+    },
+    angleAxis: {
+      show: false,
+      min: 0,
+      max: 100
+    },
+    radiusAxis: {
+      show: false,
       type: 'category',
-      boundaryGap: false,
-      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      data: this.chartData,
     },
-    yAxis: {
-      type: 'value'
+    polar: {
+      radius: ['10%', '80%']
     },
-    series: [{
-      data: [820, 932, 901, 934, 1290, 1430, 1550, 1200, 1650.1450, 1680.1890],
-      type: 'line',
-      areaStyle: {}
-    }]
+    series: [
+      {
+        name: 'Legend A',
+        type: 'bar',
+        data: [30, 40, 50, 60, 70, 80, 30, 40, 50],
+        colorBy: 'data',
+        roundCap: true,
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(220, 220, 220, 0.8)'
+        },
+        label: {
+          show: true,
+          // Try changing it to 'insideStart'
+          position: 'start',
+          formatter: '{b}'
+        },
+        //barWidth: '50%',
+        // itemStyle: {
+        //   normal: {
+        //     //color: '#ddd'
+        //   }
+        // },
+        silent: true,
+        barWidth: 10,
+  
+        coordinateSystem: 'polar',
+        barGap: '-10%'
+      }
+    ]
   }
 }
